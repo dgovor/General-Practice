@@ -10,3 +10,4 @@ SELECT
 	Email
 FROM 
 	Customer
+	
