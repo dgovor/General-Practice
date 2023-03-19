@@ -18,5 +18,5 @@ INNER JOIN
 ON
 	i.CustomerId = c.CustomerId
 ORDER BY
-	c.CustomerId
+	i.InvoiceDate DESC
 	
