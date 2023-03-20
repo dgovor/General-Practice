@@ -4,25 +4,17 @@ Create Date: 03/17/2023
 Description:
 */
 
+CREATE VIEW V_Tracks_InvoiceLine AS
 SELECT
-	e.FirstName,
-	e.LastName,
-	e.EmployeeId,
-	c.FirstName,
-	c.LastName,
-	c.CustomerId,
-	i.total
+	il.InvoiceId,
+	il.UnitPrice,
+	il.Quantity,
+	t.Name,
+	t.Composer,
+	t.Milliseconds
 FROM
-	Invoice AS i
+	InvoiceLine il
 INNER JOIN
-	Customer AS c
+	Track t
 ON
-	i.CustomerId = c.CustomerId
-INNER JOIN
-	Employee AS e
-ON
-	c.SupportRepId = e.EmployeeId
-ORDER BY
-	i.total DESC
-LIMIT 10
-	
+	il.TrackId = t.TrackId
