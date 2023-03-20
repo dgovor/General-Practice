@@ -1,20 +1,28 @@
 /*
 Created By: Dmitrii Govor
-Create Date: 03/17/2023
-Description:
+Create Date: 03/20/2023
+Description: List of customers highest commission employee supported
 */
 
-CREATE VIEW V_Tracks_InvoiceLine AS
 SELECT
-	il.InvoiceId,
-	il.UnitPrice,
-	il.Quantity,
-	t.Name,
-	t.Composer,
-	t.Milliseconds
+	c.FirstName AS [Customer First Name],
+	c.LastName AS [Customer Last Name],
+	e.FirstName AS [Employee First Name],
+	e.LastName AS [Employee Last Name],
+	sum(i.total) AS [Total Sales],
+	round(sum(i.total) *.15,2) AS Commission
 FROM
-	InvoiceLine il
+	Invoice i
 INNER JOIN
-	Track t
-ON
-	il.TrackId = t.TrackId
+	Customer c
+ON i.CustomerId = c.CustomerId
+INNER JOIN
+	Employee e
+ON e.EmployeeId = c.SupportRepId
+WHERE
+	InvoiceDate BETWEEN '2011-01-01' AND '2012-12-31'
+AND e.LastName = 'Peacock'
+GROUP BY
+	c.FirstName,
+	c.LastName
+ORDER BY [Total Sales] DESC
