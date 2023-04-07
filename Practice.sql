@@ -3,6 +3,7 @@ Created By: Dmitrii Govor
 Create Date: 03/20/2023
 Description: List of customers highest commission employee supported
 */
+
 SELECT
 	c.FirstName AS [Customer First Name],
 	c.LastName AS [Customer Last Name],
